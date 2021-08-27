@@ -2,18 +2,29 @@
 var express = require("express");
 var path = require("path");
 const fs = require("fs");
-// app should have db.json file on the backend used to store and retrieve notes using the fs module.
 
-//sets up express server and initial port for listeners
 var app = express();
 var PORT = process.env.PORT || 3001;
 
-//middleware
-app.use(express.json());
+// Middleware for parsing JSON and urlencoded form data
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // static path 
 app.use(express.static(path.join(__dirname, "public")));
 
+//GET route for homepage
+app.get('/', (req, res) => {
+      res.sendFile(path.join(__dirname,'public/index.html'));
+  });
+//GET route for notes page
+  app.get('/notes', (req, res) => {
+      res.sendFile(path.join(__dirname,'public/notes.html'));
+  });
+  
+  // Read db.json file 
+  app.get('/api/notes', (req, res) => {
+    res.sendFile(path.join(__dirname,'db/db.json'));
+  });
 
 // GET /notes 
 app.get("/notes", (req, res) => res.sendFile(__dirname + "/public/notes.html"));
