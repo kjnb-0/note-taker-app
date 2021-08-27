@@ -6,4 +6,21 @@ const fs = require("fs");
 
 //sets up express server and initial port for listeners
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3001;
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// static path 
+app.use(express.static(path.join(__dirname, "public")));
+
+
+// GET /notes 
+app.get("/notes", (req, res) => res.sendFile(__dirname + "/public/notes.html"));
+// GET *
+app.get("*", (req, res) => res.sendFile(__dirname + "/public/index.html"));
+
+
+app.listen(PORT, () =>
+  console.log(`App listening at http://localhost:${PORT} 🚀`)
+);
