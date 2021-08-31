@@ -4,7 +4,6 @@ Modififed starter code with Express.js to create an application that can be used
 
 ## Deployed Links
 Heroku: https://tranquil-taiga-99266.herokuapp.com/
-Github: https://kjnb-0.github.io/note-taker-app/
 
 ## User Story
 
